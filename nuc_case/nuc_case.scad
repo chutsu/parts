@@ -84,7 +84,7 @@ module fixtures() {
 
     translate([case_depth * 0.25, y, z + 6])
       rotate([0.0, 90.0, 90.0])
-      cylinder(h=case_thickness * 1.01, r=1.5, center=true);
+      cylinder(h=case_thickness * 1.01, r=0.7, center=true);
   }
 
   difference() {
@@ -95,7 +95,7 @@ module fixtures() {
 
     translate([case_depth * 0.75, y, z + 6])
       rotate([0.0, 90.0, 90.0])
-      cylinder(h=case_thickness * 1.01, r=1.5, center=true);
+      cylinder(h=case_thickness * 1.01, r=0.7, center=true);
   }
 }
 
@@ -104,11 +104,11 @@ module mount_holes() {
   z = case_height / 2.0 + case_thickness / 2;
   translate([case_depth * 0.25, y, z - 6])
     rotate([0.0, 90.0, 90.0])
-    cylinder(h=case_thickness * 1.01, r=2.0, center=true);
+    cylinder(h=case_thickness * 1.01, r=1.0, center=true);
 
   translate([case_depth * 0.75, y, z - 6])
     rotate([0.0, 90.0, 90.0])
-    cylinder(h=case_thickness * 1.01, r=2.0, center=true);
+    cylinder(h=case_thickness * 1.01, r=1.0, center=true);
 }
 
 module case() {
