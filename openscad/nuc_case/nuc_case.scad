@@ -58,8 +58,8 @@ module back_panel(thickness = 2.5,
     cube([thickness + 1.0, 11, 10]);
 
     // -- USB ports
-    translate([x - 0.5, 34.0, 3.0])
-    cube([thickness + 1.0, 17, 17]);
+    translate([x - 0.5, 34.0, 4.0])
+    cube([thickness + 1.0, 17, 16]);
 
     // -- HDMI ports
     translate([x - 0.5, 70.5, 6.0]) cube([thickness + 1.0, 17.0, 8.0]);
@@ -207,10 +207,10 @@ module standoffs() {
 }
 
 // Main
-// -- NUC case
-translate([0, 0, -16.5 + case_thickness])
-  rotate([90.0, 0.0, 90.0])
-  import("/home/chutsu/FreeCAD/components/intel_nuc_7i5dn.stl");
+// // -- NUC case
+// translate([0, 0, -16.5 + case_thickness])
+//   rotate([90.0, 0.0, 90.0])
+//   import("/home/chutsu/FreeCAD/components/intel_nuc_7i5dn.stl");
 
 // -- Base shell
 color("blue") base_shell();
@@ -218,13 +218,13 @@ color("blue") base_shell();
 // -- Standoffs
 standoffs();
 
-// -- Top shell
-translate([0, 0, 0.1]) color("red") top_shell();
+// // -- Top shell
+// translate([0, 0, 0.1]) color("red") top_shell();
 
-// -- Front panel
-translate([-case_depth / 2.0, -case_width / 2.0, 0.0])
-front_panel();
+// // -- Front panel
+// translate([-case_depth / 2.0, -case_width / 2.0, 0.0])
+// front_panel();
 
-// -- Back panel
-translate([-case_depth / 2.0, -case_width / 2.0, 0.0])
-back_panel();
+// // -- Back panel
+// translate([-case_depth / 2.0, -case_width / 2.0, 0.0])
+// back_panel();
