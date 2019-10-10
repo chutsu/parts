@@ -1,3 +1,4 @@
+include <standoff.scad>
 $fn = 30;
 
 /* PCB Parameters */
@@ -24,7 +25,10 @@ case_width = pcb_width + pcb_padding;
 case_depth = pcb_depth + pcb_padding + panel_indent + panel_thickness;
 case_height = 30;
 
-module front_panel(thickness = 2.5,
+module front_panel(case_width,
+                   case_height,
+                   case_thickness,
+                   thickness = 2.5,
                    indent = 7) {
   x = case_depth - panel_indent - panel_thickness;
   y = case_thickness / 2.0;
@@ -39,8 +43,11 @@ module front_panel(thickness = 2.5,
   }
 }
 
-module back_panel(thickness = 2.5,
-                  indent = 7) {
+module back_panel(case_width,
+                  case_height,
+                  case_thickness,
+                  thickness = 2.5,
+                  indent = 3) {
   x = panel_indent;
   y = case_thickness / 2.0;
   z = case_thickness / 2.0;
@@ -120,8 +127,16 @@ module case() {
     }
 
     // Front panel groove
-    front_panel(panel_thickness + 0.3, panel_indent);
-    back_panel(panel_thickness + 0.3, panel_indent);
+    front_panel(case_width,
+                case_height,
+                case_thickness,
+                panel_thickness + 0.3,
+                panel_indent);
+    back_panel(case_width,
+               case_height,
+               case_thickness,
+               panel_thickness + 0.3,
+               panel_indent);
 
     // Mount holes
     mount_holes();
@@ -140,26 +155,6 @@ module top_shell() {
   translate([0.0, case_width, case_height + case_thickness])
     rotate([180.0, 0.0, 0.0])
       case();
-}
-
-module standoff(h=11, r=2) {
-  nipple_h = h * 0.8;
-
-	// Standoff
-  difference() {
-    cylinder(h=h, r=r, center=true);
-
-    translate([0.0, 0.0, h / 2.0 - nipple_h / 2.0])
-      cylinder(h=nipple_h + 0.1, r=0.8, center=true);
-  }
-
-	// Fillet
-	fillet_h_inc = 0.1;
-	fillet_h = 2.0;
-	for (fillet_height = [fillet_h_inc:fillet_h_inc:fillet_h]) {
-		translate([0.0, 0.0, -h / 2.0 + fillet_height])
-			cylinder(h=0.1, r=r * 1.5 - fillet_height);
-	}
 }
 
 module standoffs() {
@@ -183,7 +178,7 @@ module standoffs() {
 }
 
 // Main
-// -- NUC case
+// -- Pi
 translate([-7.0, 2.0, 4.5 + case_thickness])
 	rotate([0.0, 0.0, 180.0])
   import("/home/chutsu/FreeCAD/components/pi3.stl");
@@ -194,13 +189,13 @@ color("blue") base_shell();
 // -- Standoffs
 standoffs();
 
-// -- Top shell
-translate([0, 0, 0.1]) color("red") top_shell();
+// // -- Top shell
+// translate([0, 0, 0.1]) color("red") top_shell();
 
-// -- Front panel
-translate([-case_depth / 2.0, -case_width / 2.0, 0.0])
-front_panel();
-
-// -- Back panel
-translate([-case_depth / 2.0, -case_width / 2.0, 0.0])
-back_panel();
+// // -- Front panel
+// translate([-case_depth / 2.0, -case_width / 2.0, 0.0])
+// front_panel(case_width, case_height, case_thickness);
+//
+// // -- Back panel
+// translate([-case_depth / 2.0, -case_width / 2.0, 0.0])
+// back_panel(case_width, case_height, case_thickness);
