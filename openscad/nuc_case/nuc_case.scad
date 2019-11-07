@@ -79,7 +79,7 @@ module fixtures() {
   difference() {
     translate([case_depth * 0.25, y, z])
       translate([0, 0, 2])
-      cube([20, case_thickness / 2.0, 20],
+      cube([20, case_thickness / 1.5, 20],
             center=true);
 
     translate([case_depth * 0.25, y, z + 6])
@@ -90,7 +90,7 @@ module fixtures() {
   difference() {
     translate([case_depth * 0.75, y, z])
       translate([0, 0, 2])
-      cube([20, case_thickness / 2, 20],
+      cube([20, case_thickness / 1.5, 20],
             center=true);
 
     translate([case_depth * 0.75, y, z + 6])
@@ -212,11 +212,8 @@ module standoffs() {
 //   rotate([90.0, 0.0, 90.0])
 //   import("/home/chutsu/FreeCAD/components/intel_nuc_7i5dn.stl");
 
-// -- Base shell
-color("blue") base_shell();
-
-// -- Standoffs
-standoffs();
+// Base shell
+color("blue") base_shell(); standoffs();
 
 // // -- Top shell
 // translate([0, 0, 0.1]) color("red") top_shell();
