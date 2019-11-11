@@ -3,7 +3,7 @@ $fn = 30;
 /* PCB Parameters */
 pcb_width = 95.0 + 6.6;
 pcb_depth = 90.4 + 10.4;
-pcb_padding = 12.0;
+pcb_padding = 15.0;
 
 /* Panel Parameters */
 panel_thickness = 2.5;
@@ -30,12 +30,13 @@ module front_panel(thickness = 2.5,
 
     // Ports
     // -- Power switch
-    translate([x - 0.5, 80.5, 6.0])
+    // translate([x - 0.5, 80.5, 6.0])
+    translate([x - 0.5, 82, 6.0])
     cube([thickness + 1.0, 8, 8]);
 
     // -- USB ports
-    translate([x - 0.5, 34.0, 6.0]) cube([thickness + 1.0, 15, 8]);
-    translate([x - 0.5, 51.0, 6.0]) cube([thickness + 1.0, 15, 8]);
+    translate([x - 0.5, 35.5, 6.0]) cube([thickness + 1.0, 15, 8]);
+    translate([x - 0.5, 52.5, 6.0]) cube([thickness + 1.0, 15, 8]);
   }
 }
 
@@ -54,32 +55,32 @@ module back_panel(thickness = 2.5,
 
     // IO Ports
     // -- Power port
-    translate([x - 0.5, 90.0, 4.0])
+    translate([x - 0.5, 91.5, 4.0])
     cube([thickness + 1.0, 11, 10]);
 
     // -- USB ports
-    translate([x - 0.5, 34.0, 4.0])
+    translate([x - 0.5, 35.5, 4.0])
     cube([thickness + 1.0, 17, 16]);
 
     // -- HDMI ports
-    translate([x - 0.5, 70.5, 6.0]) cube([thickness + 1.0, 17.0, 8.0]);
-    translate([x - 0.5, 13.5, 6.0]) cube([thickness + 1.0, 17.0, 8.0]);
+    translate([x - 0.5, 72.0, 6.0]) cube([thickness + 1.0, 17.0, 8.0]);
+    translate([x - 0.5, 14.5, 6.0]) cube([thickness + 1.0, 17.0, 8.0]);
 
     // -- Ethernet port
-    translate([x - 0.5, 52.0, 6.0]) cube([thickness + 1.0, 17.0, 14.0]);
+    translate([x - 0.5, 53.5, 6.0]) cube([thickness + 1.0, 17.0, 14.0]);
 
     // -- Heat sink vent
-    translate([x - 0.5, 28.0, 21.0]) cube([thickness + 1.0, 56.0, 6.0]);
+    translate([x - 0.5, 29.0, 21.0]) cube([thickness + 1.0, 56.0, 6.0]);
   }
 }
 
 module fixtures() {
-  y = case_thickness + case_thickness / 4;
+  y = case_thickness / 2.0 + case_thickness;
   z = case_height / 2.0 + case_thickness / 2;
   difference() {
     translate([case_depth * 0.25, y, z])
       translate([0, 0, 2])
-      cube([20, case_thickness / 1.5, 20],
+      cube([20, case_thickness, 20],
             center=true);
 
     translate([case_depth * 0.25, y, z + 6])
@@ -90,7 +91,7 @@ module fixtures() {
   difference() {
     translate([case_depth * 0.75, y, z])
       translate([0, 0, 2])
-      cube([20, case_thickness / 1.5, 20],
+      cube([20, case_thickness, 20],
             center=true);
 
     translate([case_depth * 0.75, y, z + 6])
@@ -155,10 +156,19 @@ module base_shell() {
 }
 
 module top_shell() {
-  translate([-case_depth / 2.0, -case_width / 2.0, 0.0])
-  translate([0.0, case_width, case_height + case_thickness])
-    rotate([180.0, 0.0, 0.0])
-      case();
+  difference() {
+    // Case
+    translate([-case_depth / 2.0, -case_width / 2.0, 0.0])
+    translate([0.0, case_width, case_height + case_thickness])
+      rotate([180.0, 0.0, 0.0])
+        case();
+
+    // Vent hole
+    translate([-case_depth / 2.0, -case_width / 2.0, 0.0])
+    translate([0.0, case_width, case_height + case_thickness])
+    translate([case_depth / 2.0 + 24, -case_width / 2 - 4.5, -case_thickness - 1])
+      cylinder(r=18, h=10);
+  }
 }
 
 module standoff(h=11, r=2) {
@@ -206,15 +216,15 @@ module standoffs() {
   };
 }
 
-// Main
+// // Main
 // // -- NUC case
 // translate([0, 0, -16.5 + case_thickness])
 //   rotate([90.0, 0.0, 90.0])
 //   import("/home/chutsu/FreeCAD/components/intel_nuc_7i5dn.stl");
-
-// Base shell
-color("blue") base_shell(); standoffs();
-
+//
+// // -- Bottom shell
+// color("blue") base_shell(); standoffs();
+//
 // // -- Top shell
 // translate([0, 0, 0.1]) color("red") top_shell();
 
@@ -222,6 +232,6 @@ color("blue") base_shell(); standoffs();
 // translate([-case_depth / 2.0, -case_width / 2.0, 0.0])
 // front_panel();
 
-// // -- Back panel
-// translate([-case_depth / 2.0, -case_width / 2.0, 0.0])
-// back_panel();
+// -- Back panel
+translate([-case_depth / 2.0, -case_width / 2.0, 0.0])
+back_panel();
