@@ -11,4 +11,4 @@ module arm(width=8, height=8, length=200, thickness=1) {
   }
 }
 
-// arm(8, 8, 200, 1);
+// arm(8, 8, 200, 0.6);
