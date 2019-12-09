@@ -10,7 +10,7 @@ module standoff(screw_size = 2.0,
   }
 }
 
-module hexagon(size, height) {
-  width = size / 1.75;
-  for (r = [-60, 0, 60]) rotate([0,0,r]) cube([width, size, height], true);
+module hexagon(hex_size, hex_height) {
+  hex_width = hex_size / 1.75;
+  for (r = [-60, 0, 60]) rotate([0,0,r]) cube([hex_width, hex_size, hex_height], true);
 }

@@ -88,6 +88,6 @@ module battery_bay() {
   //   #cube([strap_w, strap_l, strap_h], center=true);
 }
 
-$fn=30;
-battery_bay();
+// $fn=30;
+// battery_bay();
 // translate([0.0, 0.0, 0.0]) lipo();

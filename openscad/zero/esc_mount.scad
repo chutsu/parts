@@ -20,7 +20,7 @@ module frame_top() {
     rotate([0.0, 180.0, i])
       difference() {
         translate([tx, ty, tz])
-          #cylinder(r = standoff_size / 2, h = standoff_height);
+          cylinder(r = standoff_size / 2, h = standoff_height);
 
         translate([tx, ty, tz + 1])
           cylinder(r = screw_safe_size / 2, h = standoff_height);

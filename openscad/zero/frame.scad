@@ -2,6 +2,7 @@ $fn = 40;
 include <arm.scad>;
 include <lipo.scad>;
 include <battery_bay.scad>;
+include <motor_mount.scad>;
 
 off_center = 20.0;
 
@@ -101,6 +102,14 @@ for ( i = [-45.0:90.0:225.0] ){
     arm();
 }
 
+// Add motor mounts
+for ( i = [-45.0:90.0:225.0] ){
+  rotate([0.0, 0.0, i])
+    translate([0.0, 205.0, 2.0])
+      rotate([0.0, 0.0, 90.0])
+      motor_mount();
+}
+
 // translate([0.0, 0.0, -18])
 //   battery_bay();
 
@@ -110,3 +119,4 @@ translate([0.0, 0.0, 27])
 
 // Lipo
 // translate([0, 0, -37]) lipo(lipo_width, lipo_height, lipo_length);
+
