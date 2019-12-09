@@ -100,5 +100,5 @@ module motor_mount(mount_holes_w = 16.0,
   }
 }
 
-// $fn = 30;
-// motor_mount();
+$fn = 30;
+motor_mount();
