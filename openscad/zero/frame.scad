@@ -93,29 +93,29 @@ module plate_with_holes() {
 // Add plate
 plate_with_holes();
 
-// // Add arms
-// dy = -(slot_width / 2.0) - (plate_thickness / 2.0);
-// translate([0.0, 0.0, dy])
-// for ( i = [-45.0:90.0:225.0] ){
-//   rotate([0.0, 90.0, i])
-//   translate([0.0, 0.0, off_center])
-//     arm();
-// }
+// Add arms
+dy = -(slot_width / 2.0) - (plate_thickness / 2.0);
+translate([0.0, 0.0, dy])
+for ( i = [-45.0:90.0:225.0] ){
+  rotate([0.0, 90.0, i])
+  translate([0.0, 0.0, off_center])
+    arm();
+}
 
-// // Add motor mounts
-// for ( i = [-45.0:90.0:225.0] ){
-//   rotate([0.0, 0.0, i])
-//     translate([0.0, 205.0, 2.0])
-//       rotate([0.0, 0.0, 90.0])
-//       motor_mount();
-// }
+// Add motor mounts
+for ( i = [-45.0:90.0:225.0] ){
+  rotate([0.0, 0.0, i])
+    translate([0.0, 205.0, 2.0])
+      rotate([0.0, 0.0, 90.0])
+      motor_mount();
+}
 
 // translate([0.0, 0.0, -18])
 //   battery_bay();
 
-// translate([0.0, 0.0, 27])
-//   rotate([180.0, 0.0, 0.0])
-//     battery_bay();
+translate([0.0, 0.0, 27])
+  rotate([180.0, 0.0, 0.0])
+    battery_bay();
 
 // Lipo
 // translate([0, 0, -37]) lipo(lipo_width, lipo_height, lipo_length);
